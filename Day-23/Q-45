@@ -1,0 +1,18 @@
+#include <stdio.h>
+int main() {
+    int n;
+    printf("Enter the number of terms (n): ");
+    scanf("%d", &n);
+    if (n <= 0) {
+        printf("Please enter a positive integer for n.\n");
+        return 1;
+    }
+    double sum = 0.0;
+    for (int k = 1; k <= n; k++) {
+        int num = 2 * k;
+        int den = 4 * k - 1;
+        sum += (double)num / den;
+    }
+    printf("Sum of the series up to %d terms is: %.6f\n", n, sum);
+    return 0;
+}
