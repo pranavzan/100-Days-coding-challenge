@@ -1,0 +1,21 @@
+#include <stdio.h>
+int main() {
+    int n;
+    printf("Enter a positive integer: ");
+    scanf("%d", &n);
+    if (n <= 0) {
+        printf("Please enter a positive integer.\n");
+        return 1;
+    }
+    int product = 1;
+    int temp = n;
+    while (temp > 0) {
+        int digit = temp % 10;
+        if (digit % 2 != 0) {
+            product *= digit;
+        }
+        temp /= 10;
+    }
+    printf("Product of odd digits of the number is: %d\n", product);
+    return 0;
+}
