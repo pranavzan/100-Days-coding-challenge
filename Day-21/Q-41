@@ -1,0 +1,30 @@
+#include <stdio.h>
+int main() {
+    int n;
+    printf("Enter a positive integer: ");
+    scanf("%d", &n);
+    if (n <= 0) {
+        printf("Please enter a positive integer.\n");
+        return 1;
+    }
+    if (n < 10) {
+        printf("The number has only one digit. Swapped number is: %d\n", n);
+        return 0;
+    }
+    int temp = n;
+    int digits = 0;
+    while (temp > 0) {
+        digits++;
+        temp /= 10;
+    }
+    int power = 1;
+    for (int i = 1; i < digits; i++) {
+        power *= 10;
+    }
+    int first_digit = n / power;
+    int last_digit = n % 10;
+    int middle = (n % power) / 10;
+    int swapped = last_digit * power + middle * 10 + first_digit;
+    printf("Swapped number (first and last digits swapped) is: %d\n", swapped);
+    return 0;
+}
