@@ -1,0 +1,40 @@
+#include <stdio.h>
+int main() {
+    int n;
+    printf("Enter the size of the first array: ");
+    scanf("%d", &n);
+    if (n <= 0) {
+        printf("Invalid array size! Please enter a positive number.\n");
+        return 1;
+    }
+    int arr1[n];
+    printf("Enter %d elements for the first array: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr1[i]);
+    }
+    int m;
+    printf("Enter the size of the second array: ");
+    scanf("%d", &m);
+    if (m <= 0) {
+        printf("Invalid array size! Please enter a positive number.\n");
+        return 1;
+    }
+    int arr2[m];
+    printf("Enter %d elements for the second array: ", m);
+    for (int i = 0; i < m; i++) {
+        scanf("%d", &arr2[i]);
+    }
+    int merged[n + m];
+    for (int i = 0; i < n; i++) {
+        merged[i] = arr1[i];
+    }
+    for (int i = 0; i < m; i++) {
+        merged[n + i] = arr2[i];
+    }
+    printf("Merged array: ");
+    for (int i = 0; i < n + m; i++) {
+        printf("%d ", merged[i]);
+    }
+    printf("\n");
+    return 0;
+}
