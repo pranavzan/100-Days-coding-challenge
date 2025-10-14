@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>  // For malloc
+#include <limits.h>  // For INT_MIN
+
+int main() {
+    int n, i;
+    int largest = INT_MIN;
+    int secondLargest = INT_MIN;
+    
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    
+    if (n <= 0) {
+        printf("Array is empty or invalid size, no second largest element.\n");
+        return 0;
+    }
+    
+    int *arr = (int*)malloc(n * sizeof(int));  // Allocate memory for the array
+    
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    
+    printf("Enter the array elements: ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    
+    // Find the largest and second largest elements
+    for (i = 0; i < n; i++) {
+        if (arr[i] > largest) {
+            secondLargest = largest;  // Update second largest to previous largest
+            largest = arr[i];  // Update largest
+        } else if (arr[i] > secondLargest && arr[i] < largest) {
+            secondLargest = arr[i];  // Update second largest
+        }
+        // If arr[i] == largest, we don't change secondLargest to handle duplicates
+    }
+    
+    if (secondLargest != INT_MIN) {
+        printf("The second largest element is: %d\n", secondLargest);
+    } else {
+        printf("There is no second largest element (all elements are the same or less than one unique element).\n");
+    }
+    
+    free(arr);  // Free the allocated memory
+    return 0;
+}
