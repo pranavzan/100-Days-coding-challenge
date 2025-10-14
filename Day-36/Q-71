@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>  
+int main() {
+    int rows, cols, i, j;
+    
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+    
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+    
+    if (rows <= 0 || cols <= 0) {
+        printf("Invalid matrix size, cannot create an empty matrix.\n");
+        return 0;
+    }
+    
+    int **matrix = (int **)malloc(rows * sizeof(int *));  
+    
+    if (matrix == NULL) {
+        printf("Memory allocation for rows failed!\n");
+        return 1;
+    }
+    
+    for (i = 0; i < rows; i++) {
+        matrix[i] = (int *)malloc(cols * sizeof(int));  
+        if (matrix[i] == NULL) {
+            printf("Memory allocation for row %d failed!\n", i);
+
+            for (j = 0; j < i; j++) {
+                free(matrix[j]);
+            }
+            free(matrix);
+            return 1;
+        }
+    }
+    
+    printf("Enter the matrix elements:\n");
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+    
+    printf("The matrix is:\n");
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            printf("%d ", matrix[i][j]);  
+        }
+        printf("\n"); 
+    }
+    for (i = 0; i < rows; i++) {
+        free(matrix[i]);
+    }
+    free(matrix);
+    
+    return 0;
+}
