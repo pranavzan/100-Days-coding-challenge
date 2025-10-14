@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+    int n, k, i;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    if (n <= 0) {
+        printf("Array is empty or invalid size, no rotation possible.\n");
+        return 0;
+    }
+    
+    int *arr = (int*)malloc(n * sizeof(int));  
+    
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    
+    printf("Enter the array elements: ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    
+    printf("Enter the number of positions to rotate right: ");
+    scanf("%d", &k);
+    
+    if (k > 0) {
+        k = k % n;
+    } else if (k == 0) {
+        printf("No rotation needed.\n");
+    } else {
+        k = n + (k % n);
+    }
+    
+    if (k > 0) {
+        int *temp = (int*)malloc(k * sizeof(int));  
+        
+        if (temp == NULL) {
+            printf("Memory allocation for temporary array failed!\n");
+            free(arr);
+            return 1;
+        }
+        
+        for (i = 0; i < k; i++) {
+            temp[i] = arr[n - k + i];
+        }
+        
+        for (i = n - 1; i >= k; i--) {
+            arr[i] = arr[i - k];
+        }
+        
+        for (i = 0; i < k; i++) {
+            arr[i] = temp[i];
+        }
+        
+        free(temp);  
+    }
+    
+    printf("Array after rotating right by %d positions: ", k);
+    for (i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    free(arr);  
+    return 0;
+}
