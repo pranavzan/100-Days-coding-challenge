@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    char str1[1000]; 
+    char str2[1000]; 
+    printf("Enter the first string: ");
+    fgets(str1, sizeof(str1), stdin);
+    size_t len1 = strlen(str1);
+    if (len1 > 0 && str1[len1 - 1] == '\n') {
+        str1[len1 - 1] = '\0';
+    }
+    printf("Enter the second string: ");
+    fgets(str2, sizeof(str2), stdin);
+    size_t len2 = strlen(str2);
+    if (len2 > 0 && str2[len2 - 1] == '\n') {
+        str2[len2 - 1] = '\0';
+    }
+    if (strlen(str1) != strlen(str2)) {
+        printf("The strings are not anagrams.\n");
+        return 0;
+    }
+    int count1[128] = {0}; 
+    int count2[128] = {0};  
+    for (int i = 0; str1[i] != '\0'; i++) {
+        unsigned char ch = (unsigned char)str1[i];
+        count1[ch]++;
+    }
+    for (int i = 0; str2[i] != '\0'; i++) {
+        unsigned char ch = (unsigned char)str2[i];
+        count2[ch]++;
+    }
+    int areAnagrams = 1; 
+    for (int i = 0; i < 128; i++) {
+        if (count1[i] != count2[i]) {
+            areAnagrams = 0;
+            break;
+        }
+    }
+    if (areAnagrams) {
+        printf("The strings are anagrams.\n");
+    } else {
+        printf("The strings are not anagrams.\n");
+    }
+    return 0;
+}
