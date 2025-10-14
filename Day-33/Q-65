@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>  
+int binarySearch(int arr[], int low, int high, int target) {
+    while (low <= high) {
+        int mid = low + (high - low) / 2;  
+        if (arr[mid] == target) {
+            return mid;  
+        } else if (arr[mid] < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return -1; 
+}
+int main() {
+    int n, target, i, result;
+    printf("Enter the size of the sorted array: ");
+    scanf("%d", &n);
+    int *arr = (int*)malloc(n * sizeof(int));  
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    printf("Enter the sorted array elements: ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter the element to search for: ");
+    scanf("%d", &target);
+    result = binarySearch(arr, 0, n - 1, target);
+    if (result != -1) {
+        printf("Element %d found at index %d.\n", target, result);
+    } else {
+        printf("Element %d not found in the array.\n", target);
+    }
+    free(arr); 
+    return 0;
+}
