@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+void capitalize(char* str) {
+    if (str[0] && isalpha(str[0])) {
+        str[0] = toupper(str[0]); 
+    }
+    for (int i = 1; str[i] != '\0'; i++) {
+        str[i] = tolower(str[i]); 
+    }
+}
+int main() {
+    char name[1000];  
+    char words[100][100];  
+    int count = 0;  
+    char output[1000] = {0};  
+    printf("Enter a name: ");
+    fgets(name, sizeof(name), stdin);
+    size_t len = strlen(name);
+    if (len > 0 && name[len - 1] == '\n') {
+        name[len - 1] = '\0';
+    }
+    char *token = strtok(name, " ");  
+    while (token != NULL && count < 100) {
+        strcpy(words[count], token);  
+        count++;
+        token = strtok(NULL, " ");
+    }
+    int firstInitial = 1;
+    for (int i = 0; i < count; i++) {
+        if (i < count - 1 && isalpha(words[i][0])) { 
+            char initial = toupper(words[i][0]);  
+            if (firstInitial) {
+                sprintf(output + strlen(output), "%c.", initial);  
+                firstInitial = 0;
+            } else {
+                sprintf(output + strlen(output), " %c.", initial);  
+            }
+        }
+    }
+    
+    if (count > 0) {  
+        capitalize(words[count - 1]); 
+        if (strlen(output) > 0) {
+            sprintf(output + strlen(output), " %s", words[count - 1]);  
+        } else {
+            sprintf(output, "%s", words[count - 1]);
+        }
+    }
+    if (strlen(output) > 0) {
+        printf("Output: %s\n", output); 
+    } else {
+        printf("No valid name found.\n");
+    }
+    return 0;
+}
