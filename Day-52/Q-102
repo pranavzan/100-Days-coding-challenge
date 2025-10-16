@@ -1,0 +1,33 @@
+#include <stdio.h>
+int lowerBound(int arr[], int n, int x) {
+    int low = 0, high = n - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;  
+        if (arr[mid] < x) {
+            low = mid + 1;  
+        } else {
+            high = mid - 1; 
+        }
+    }
+    if (low < n && arr[low] >= x) {
+        return low;  
+    } else {
+        return -1;  
+    }
+}
+int main() {
+    int n; 
+    int arr[1000];  
+    int x;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    printf("Enter the sorted array elements: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter the integer x: ");
+    scanf("%d", &x);
+    int index = lowerBound(arr, n, x);
+    printf("Index of the smallest element >= x: %d\n", index);
+    return 0;
+}
