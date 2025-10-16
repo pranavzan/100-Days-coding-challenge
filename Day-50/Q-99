@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>  
+#include <ctype.h>   
+int main() {
+    char date[20];  
+    char dd[3];     
+    char mm[3];     
+    char yyyy[5];   
+    printf("Enter a date (dd/mm/yyyy): ");
+    fgets(date, sizeof(date), stdin);
+    size_t len = strlen(date);
+    if (len > 0 && date[len - 1] == '\n') {
+        date[len - 1] = '\0';
+    }
+    strncpy(dd, date, 2);
+    dd[2] = '\0';  
+    strncpy(mm, date + 3, 2);
+    mm[2] = '\0';  
+    strncpy(yyyy, date + 6, 4);
+    yyyy[4] = '\0'; 
+    int monthNum = atoi(mm);
+    const char* months[12] = {
+        "Jan", "Feb", "Mar", "Apr",
+        "May", "Jun", "Jul", "Aug",
+        "Sep", "Oct", "Nov", "Dec"
+    };
+    if (monthNum >= 1 && monthNum <= 12) {
+        const char* monthAbbr = months[monthNum - 1];  
+        char newDate[20];  
+        sprintf(newDate, "%s-%s-%s", dd, monthAbbr, yyyy);
+        printf("New date format: %s\n", newDate);  
+    } else {
+        printf("Invalid month entered.\n");  
+    }
+    return 0;
+}
