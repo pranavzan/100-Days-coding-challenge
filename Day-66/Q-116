@@ -1,0 +1,41 @@
+#include <stdio.h>
+#define MAX_SIZE 100
+void findTwoSum(int nums[], int n, int target, int *index1, int *index2) {
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (nums[i] + nums[j] == target) {
+                *index1 = i;
+                *index2 = j;
+                return;
+            }
+        }
+    }
+    *index1 = -1;
+    *index2 = -1;
+}
+int main() {
+    int nums[MAX_SIZE];
+    int n, target;
+    int index1, index2;
+
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &nums[i]);
+    }
+
+    printf("Enter the target value: ");
+    scanf("%d", &target);
+
+    findTwoSum(nums, n, target, &index1, &index2);
+
+    if (index1 != -1 && index2 != -1) {
+        printf("The indices are: %d %d\n", index1, index2);
+    } else {
+        printf("-1 -1\n");
+    }
+
+    return 0;
+}
