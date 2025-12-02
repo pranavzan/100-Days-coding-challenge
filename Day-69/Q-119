@@ -1,0 +1,35 @@
+#include <stdio.h>
+#define MAX_SIZE 100
+int findDuplicate(int nums[], int n) {
+    int seen[MAX_SIZE] = {0}; // Array to keep track of seen numbers
+
+    for (int i = 0; i < n; i++) {
+        if (seen[nums[i]] == 1) {
+            return nums[i]; // Duplicate found
+        }
+        seen[nums[i]] = 1; // Mark this number as seen
+    }
+
+    return -1; // No duplicate found (should not happen as per problem statement)
+}
+int main() {
+    int nums[MAX_SIZE];
+    int n;
+
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &nums[i]);
+    }
+
+    int duplicate = findDuplicate(nums, n);
+    if (duplicate != -1) {
+        printf("The repeated element is: %d\n", duplicate);
+    } else {
+        printf("No duplicate found\n");
+    }
+
+    return 0;
+}
